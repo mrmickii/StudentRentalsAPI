@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tblreservation")
+@Table(name="tblproperty")
 public class PropertyEntity {
 	
 	@Id
