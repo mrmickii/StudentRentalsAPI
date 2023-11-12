@@ -19,7 +19,7 @@ public class PropertyService {
 	public PropertyEntity insertProperty(PropertyEntity property) {
 		return prepo.save(property);
 	}
-	
+	//Get all list of property/dorm
 	public List<PropertyEntity> getAllProperty(){
 		return prepo.findAll();
 	}
@@ -45,6 +45,7 @@ public class PropertyService {
 		}
 	}
 	
+	//Delete
 	public String deleteProperty(int propid) {
 		String msg = "";
 		

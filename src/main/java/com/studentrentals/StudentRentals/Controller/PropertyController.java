@@ -29,20 +29,20 @@ public class PropertyController {
 		return propserv.insertProperty(property);
 	}
 	
-	@GetMapping("/getAllProperty")
 	//Read
+	@GetMapping("/getAllProperty")
 	public List<PropertyEntity> getAllProperty(){
 		return propserv.getAllProperty();
 	}
 	
-	@PutMapping("/updateProperty")
 	//Update
+	@PutMapping("/updateProperty")
 	public PropertyEntity updateProperty(@RequestParam int propid, @RequestBody PropertyEntity newproperty) {
 		return propserv.updateProperty(propid, newproperty);
 	}
 	
-	@DeleteMapping("/deleteProperty/{propid}")
 	//Delete
+	@DeleteMapping("/deleteProperty/{propid}")
 	public String deleteProperty(@PathVariable int propid) {
 		return propserv.deleteProperty(propid);
 	}

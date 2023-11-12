@@ -15,14 +15,19 @@ public class PropertyEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="propertyid")
 	private int propid;
+	
 	@Column(name="address")
 	private String address;
+	
 	@Column(name="price")
 	private int price;
+	
 	@Column(name="type")
 	private String type;
+	
 	@Column(name="size")
 	private int size;
+	
 	@Column(name="numberofbedrooms")
 	private int numbeds;
 	
@@ -76,6 +81,5 @@ public class PropertyEntity {
 
 	public void setNumbeds(int numbeds) {
 		this.numbeds = numbeds;
-	}
-	
+	}	
 }
