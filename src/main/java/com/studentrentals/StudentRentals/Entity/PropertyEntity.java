@@ -35,6 +35,16 @@ public class PropertyEntity {
 		super();
 	}
 
+	public PropertyEntity(int propid, String address, int price, String type, int size, int numbeds) {
+		super();
+		this.propid = propid;
+		this.address = address;
+		this.price = price;
+		this.type = type;
+		this.size = size;
+		this.numbeds = numbeds;
+	}
+
 	public int getPropid() {
 		return propid;
 	}
