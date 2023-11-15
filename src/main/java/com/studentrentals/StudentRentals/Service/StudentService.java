@@ -47,10 +47,11 @@ public class StudentService {
 	
 	//D- delete a student
 	public String deleteStudent(int student_id) {
-		String msg = "tangina mo tapos na na delete na";
+		String msg = "";
 		
 		if(srepo.findById(student_id) != null) {
 			srepo.deleteById(student_id);
+			msg = "Student " + student_id + " is successfully deleted";
 		}else
 			msg = "Student " + student_id + " does not exist.";
 		
