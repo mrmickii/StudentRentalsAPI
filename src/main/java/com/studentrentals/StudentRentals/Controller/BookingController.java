@@ -13,31 +13,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.studentrentals.StudentRentals.Entity.ReservationEntity;
-import com.studentrentals.StudentRentals.Service.ReservationService;
+import com.studentrentals.StudentRentals.Entity.BookingEntity;
+import com.studentrentals.StudentRentals.Service.BookingService;
 
 @Controller 
 @RequestMapping("/reservation")
-public class ReservationController {
+public class BookingController {
 	
 	@Autowired
-	ReservationService reserv;
+	BookingService reserv;
 	
 	//Create
 	@PostMapping("/insertReserv")
-	public ReservationEntity insertReserv(@RequestBody ReservationEntity resvartion) {
+	public BookingEntity insertReserv(@RequestBody BookingEntity resvartion) {
 		return reserv.insert(resvartion);
 	}
 	
 	//Read
 	@GetMapping("/getAllReserv")
-	public List<ReservationEntity>getAllReservation(){
+	public List<BookingEntity>getAllReservation(){
 		return reserv.getAllReservation();
 	}
 	
 	//Update
     @PutMapping("/updateReserv")
-    public ReservationEntity updateReserv(@RequestParam int reservationid, @RequestBody ReservationEntity res) {
+    public BookingEntity updateReserv(@RequestParam int reservationid, @RequestBody BookingEntity res) {
     	return reserv.update(reservationid, res);
     }
     

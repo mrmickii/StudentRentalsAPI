@@ -6,54 +6,63 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.studentrentals.StudentRentals.Entity.ReservationEntity;
-import com.studentrentals.StudentRentals.Repository.ReservationRepository;
+import com.studentrentals.StudentRentals.Entity.BookingEntity;
+import com.studentrentals.StudentRentals.Repository.BookingRepository;
+
 
 @Service
-public class ReservationService {
-	
+public class BookingService {
 	
 	@Autowired
-	ReservationRepository reservationRep;
+	BookingRepository bookrep;
 	
-	public ReservationEntity insert(ReservationEntity reserv) {
-		return reservationRep.save(reserv);
+	//Create
+	public BookingEntity insert(BookingEntity booking) {
+		return bookrep.save(booking);
 	}
 	
-	public List<ReservationEntity> getAllReservation(){
-		return reservationRep.findAll();
+	//GetAll
+	public List<BookingEntity> getAllBooking(){
+		return bookrep.findAll();
 	}
 	
+	//Update
 	@SuppressWarnings("finally")
-	public ReservationEntity update(int reservationid, ReservationEntity newresv) {
+	public BookingEntity update(int bookingid,BookingEntity newbooking){
 		
-		ReservationEntity reserv = new ReservationEntity();
-		
+		BookingEntity booking = new BookingEntity();
 		try {
-			reserv = reservationRep.findById(reservationid).get();
+			booking = bookrep.findById(bookingid).get();
 			
-			reserv.setPaymentStatus(newresv.getPaymentStatus());
-			reserv.setReservationDate(newresv.getReservationDate());
-			reserv.setStatus(newresv.getStatus());
+			booking.setFirstName(newbooking.getFirstName());
+			booking.setMiddleName(newbooking.getMiddleName());
+			booking.setLastName(newbooking.getLastName());
+			booking.setDateBirth(newbooking.getDateBirth());
+			booking.setEmail(newbooking.getEmail());
+			booking.setNumber(newbooking.getNumber());
+			booking.setSchool(newbooking.getSchool());
 			
 		}catch(NoSuchElementException e){
-			throw new NoSuchElementException("Reservation " +reservationid+ " does not exist!");
+			throw new NoSuchElementException("Booking " +bookingid+ " does not  exist!");
 		}finally {
-			return reservationRep.save(reserv);
+			return bookrep.save(booking);
 		}
-	 
+		
 	}
 	
-	public String delete(int reservationid) {
-        String msg = "";
+	//Delete
+	public String delete(int bookingid) {
+		String msg = "";
 		
-		if(reservationRep.findById(reservationid) != null) {
-			reservationRep.deleteById(reservationid);
-			msg = "Reservation " +reservationid+ " is successfully deleted";
+		if(bookrep.findById(bookingid) != null) {
+			bookrep.deleteById(bookingid);
+			msg = "Booking " +bookingid+ " is successfully deleted";
 		}else {
-			msg = "Reservation " +reservationid+ " does not exists";
+			msg = "Booking " +bookingid+ " does not exist"; 
 		}
 		return msg;
+		
+		
 	}
 
 }

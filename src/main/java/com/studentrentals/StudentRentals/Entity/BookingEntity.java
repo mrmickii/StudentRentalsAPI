@@ -8,68 +8,118 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tblreservation")
-public class ReservationEntity {
+@Table(name="tblbooking")
+public class BookingEntity {
 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="reservationid")
-	private int reservationid;
+	@Column(name="bookingid")
+	private int bookingid;
 	
-	@Column(name="reservationDate")
-	private String reservationDate;
+	@Column(name="fname")
+	private String firstName;
 	
-	@Column(name="paymentStatus")
-	private String paymentStatus;
+	@Column(name="mname")
+	private String middleName;
 	
-	@Column(name="status")
-	private String status;
+	@Column(name="lname")
+	private String lastName;
+	
+	@Column(name="dbirth")
+	private String dateBirth;
+	
+	@Column(name="email")
+	private String email;
+	
+	@Column(name="number")
+	private String number;
+	
+	@Column(name="school")
+	private String school;
 
-	public ReservationEntity() {
+	public BookingEntity() {
 		super();
 	}
 
-	public ReservationEntity(int reservationid, String reservationDate, String paymentStatus, String status) {
+	public BookingEntity(int bookingid, String firstName, String middleName, String lastName, String dateBirth,
+			String email, String number, String school) {
 		super();
-		this.reservationid = reservationid;
-		this.reservationDate = reservationDate;
-		this.paymentStatus = paymentStatus;
-		this.status = status;
+		this.bookingid = bookingid;
+		this.firstName = firstName;
+		this.middleName = middleName;
+		this.lastName = lastName;
+		this.dateBirth = dateBirth;
+		this.email = email;
+		this.number = number;
+		this.school = school;
 	}
 
-	public int getReservationid() {
-		return reservationid;
+	public int getBookingid() {
+		return bookingid;
 	}
 
-	public void setReservationid(int reservationid) {
-		this.reservationid = reservationid;
+	public void setBookingid(int bookingid) {
+		this.bookingid = bookingid;
 	}
 
-	public String getReservationDate() {
-		return reservationDate;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setReservationDate(String reservationDate) {
-		this.reservationDate = reservationDate;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getPaymentStatus() {
-		return paymentStatus;
+	public String getMiddleName() {
+		return middleName;
 	}
 
-	public void setPaymentStatus(String paymentStatus) {
-		this.paymentStatus = paymentStatus;
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getDateBirth() {
+		return dateBirth;
+	}
+
+	public void setDateBirth(String dateBirth) {
+		this.dateBirth = dateBirth;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
 	}
 	
+	
 
-
+	
 }
