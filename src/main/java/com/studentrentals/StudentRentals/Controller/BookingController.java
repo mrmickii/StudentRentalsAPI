@@ -21,30 +21,30 @@ import com.studentrentals.StudentRentals.Service.BookingService;
 public class BookingController {
 	
 	@Autowired
-	BookingService reserv;
+	BookingService bookserv;
 	
 	//Create
 	@PostMapping("/insertReserv")
-	public BookingEntity insertReserv(@RequestBody BookingEntity resvartion) {
-		return reserv.insert(resvartion);
+	public BookingEntity insert(@RequestBody BookingEntity booking) {
+		return bookserv.insert(booking);
 	}
 	
 	//Read
 	@GetMapping("/getAllReserv")
-	public List<BookingEntity>getAllReservation(){
-		return reserv.getAllReservation();
+	public List<BookingEntity>getAllBooking(){
+		return bookserv.getAllBooking();
 	}
 	
 	//Update
     @PutMapping("/updateReserv")
-    public BookingEntity updateReserv(@RequestParam int reservationid, @RequestBody BookingEntity res) {
-    	return reserv.update(reservationid, res);
+    public BookingEntity update(@RequestParam int bookingid, @RequestBody BookingEntity booking) {
+    	return bookserv.update(bookingid, booking);
     }
     
     //Delete
   	@DeleteMapping("/deleteProperty/{propid}")
-  	public String deleteReserv(@PathVariable int reservationid) {
-  		return reserv.delete(reservationid);
+  	public String delete(@PathVariable int bookingid) {
+  		return bookserv.delete(bookingid);
   	}
 
 }
