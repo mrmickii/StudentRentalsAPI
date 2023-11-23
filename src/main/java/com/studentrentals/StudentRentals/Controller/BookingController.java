@@ -17,32 +17,32 @@ import com.studentrentals.StudentRentals.Entity.BookingEntity;
 import com.studentrentals.StudentRentals.Service.BookingService;
 
 @Controller 
-@RequestMapping("/reservation")
+@RequestMapping("/booking")
 public class BookingController {
 	
 	@Autowired
 	BookingService bookserv;
 	
 	//Create
-	@PostMapping("/insertReserv")
+	@PostMapping("/insertBooking")
 	public BookingEntity insert(@RequestBody BookingEntity booking) {
 		return bookserv.insert(booking);
 	}
 	
 	//Read
-	@GetMapping("/getAllReserv")
+	@GetMapping("/getAllBooking")
 	public List<BookingEntity>getAllBooking(){
 		return bookserv.getAllBooking();
 	}
 	
 	//Update
-    @PutMapping("/updateReserv")
+    @PutMapping("/updateBooking")
     public BookingEntity update(@RequestParam int bookingid, @RequestBody BookingEntity booking) {
     	return bookserv.update(bookingid, booking);
     }
     
     //Delete
-  	@DeleteMapping("/deleteProperty/{propid}")
+  	@DeleteMapping("/deleteBooking/{bookingid}")
   	public String delete(@PathVariable int bookingid) {
   		return bookserv.delete(bookingid);
   	}
