@@ -3,6 +3,7 @@ package com.studentrentals.StudentRentals.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,4 +47,17 @@ public class PaymentController {
 	public String deletePayment(@PathVariable int paymentid) {
 		return payserv.deletePayment(paymentid);
 	}
+	
+	@GetMapping("/paymentStatus/{paymentid}")
+	public ResponseEntity<String> checkpaymentStatus(@PathVariable int paymentid){
+		boolean success = payserv.paymentStatus(paymentid);
+		
+		if(success) {
+			return ResponseEntity.ok("Payment " + paymentid + " is succesful");
+		}else {
+			return ResponseEntity.ok("Payment " + paymentid + "is not successful");
+		}
+		
+	}
+	
 }

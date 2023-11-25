@@ -20,7 +20,7 @@ public class PaymentEntity {
 		private String paymentmethod;
 		
 		@Column(name="amount")
-		private int amount;
+		private double amount;
 		
 		@Column(name="status")
 		private boolean status;
@@ -29,7 +29,7 @@ public class PaymentEntity {
 			super();
 		}
 
-		public PaymentEntity(int paymentId, String paymentMethod, int amount, boolean status) {
+		public PaymentEntity(int paymentId, String paymentMethod, double amount, boolean status) {
 			super();
 			this.paymentid = paymentId;
 			this.paymentmethod = paymentMethod;
@@ -45,7 +45,7 @@ public class PaymentEntity {
 			return paymentmethod;
 		}
 
-		public int getAmount() {
+		public double getAmount() {
 			return amount;
 		}
 
@@ -61,7 +61,7 @@ public class PaymentEntity {
 			this.paymentmethod = paymentMethod;
 		}
 
-		public void setAmount(int amount) {
+		public void setAmount(double amount) {
 			this.amount = amount;
 		}
 
