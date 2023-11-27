@@ -68,4 +68,14 @@ public class PaymentEntity {
 		public void setStatus(boolean status) {
 			this.status = status;
 		}
+		
+		@Override
+	    public String toString() {
+	        return "Payment Details{" +
+	                "paymentid= " + paymentid +
+	                ", paymentmethod= ' " + paymentmethod + '\'' +
+	                ", amount= " + amount +
+	                ", status= " + status +
+	                '}';
+	    }
 }
