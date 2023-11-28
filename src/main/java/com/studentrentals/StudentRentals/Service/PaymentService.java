@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.studentrentals.StudentRentals.Entity.PaymentEntity;
+
 import com.studentrentals.StudentRentals.Repository.PaymentRepository;
 
 
@@ -57,4 +58,21 @@ public class PaymentService {
 		}
 		return msg;
 	}
+	
+	public boolean paymentStatus(int paymentid) {
+	    try {
+	        PaymentEntity payment = payrepo.findById(paymentid).orElseThrow(() ->
+	            new NoSuchElementException("Payment " + paymentid + " does not exist!")
+	        );
+
+	       
+	        return payment.isStatus();
+	    } catch (NoSuchElementException e) {
+	        
+	        throw e;
+	    }
+	}
+	
+	
+	
 }
