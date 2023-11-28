@@ -51,7 +51,7 @@ public class PaymentService {
 		
 		if(payrepo.findById(paymentid) != null) {
 			payrepo.deleteById(paymentid);
-			msg = "Payment " +paymentid+ " is successfully deleted";
+			msg = "Payment " +paymentid+ " is successfully deleted	";
 		}else {
 			msg = "Payment " +paymentid+ " does not exist"; 
 		}

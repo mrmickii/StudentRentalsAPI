@@ -5,11 +5,13 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Repository.StudentRepository;
 
 @Service
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentService {
 	@Autowired
 	StudentRepository srepo;
@@ -57,6 +59,5 @@ public class StudentService {
 		
 		return msg;
 	}
-	
 }
 

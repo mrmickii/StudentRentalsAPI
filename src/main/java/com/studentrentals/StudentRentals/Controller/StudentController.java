@@ -17,7 +17,7 @@ import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Service.StudentService;
 
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/students")
 public class StudentController {
 	
 	@Autowired
