@@ -2,7 +2,7 @@ package com.studentrentals.StudentRentals.Service;
 
 
 
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,22 +26,14 @@ public class NotificationService {
         return payment.orElse(null);
     }
 	
-	public boolean checkPaymentStatus(int paymentId) {
-        try {
-            PaymentEntity payment = getPaymentById(paymentId);
-
-            if (payment != null) {
-                return payserv.paymentStatus(paymentId);
-            } else {
-                
-                return false;
-            }
-
-        } catch (Exception e) {
-            
-            return false;
-        }
-    }
+	public List<PaymentEntity> getAllPayment() {
+	    List<PaymentEntity> payments = payserv.getAllPayment();
+	    for (PaymentEntity payment : payments) {
+	        payment.setStatus(payserv.paymentStatus(payment.getPaymentId()));
+	    }
+	    System.out.println();
+	    return payments;
+	}
 	
 	
 	

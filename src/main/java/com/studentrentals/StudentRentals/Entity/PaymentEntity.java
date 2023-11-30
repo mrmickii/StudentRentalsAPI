@@ -70,12 +70,14 @@ public class PaymentEntity {
 		}
 		
 		@Override
-	    public String toString() {
-	        return "Payment Details{" +
-	                "paymentid= " + paymentid +
-	                ", paymentmethod= ' " + paymentmethod + '\'' +
-	                ", amount= " + amount +
-	                ", status= " + status +
-	                '}';
-	    }
+		public String toString() {
+		    StringBuilder sb = new StringBuilder();
+		    sb.append("Payment Details{ ");
+		    sb.append("paymentid= ").append(paymentid).append(", ");
+		    sb.append("paymentMethod= ").append(paymentmethod).append(", ");
+		    sb.append("amount= ").append(amount).append(", ");
+		    sb.append("status= ").append(status).append(" }");
+		    return sb.toString();
+		}
+		
 }
