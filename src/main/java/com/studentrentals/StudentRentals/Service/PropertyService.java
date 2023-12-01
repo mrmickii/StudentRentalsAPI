@@ -15,46 +15,33 @@ public class PropertyService {
 	@Autowired
 	PropertyRepository prepo;
 	
-	//Create or insert a property/dorm
 	public PropertyEntity insertProperty(PropertyEntity property) {
 		return prepo.save(property);
 	}
-	//Get all list of property/dorm
+
 	public List<PropertyEntity> getAllProperty(){
 		return prepo.findAll();
 	}
-		
-	//Update 
-	@SuppressWarnings("finally")
+
 	public PropertyEntity updateProperty(int propid, PropertyEntity newproperty) {
-		
-		PropertyEntity property = new PropertyEntity();
-		
-		try {
-			property = prepo.findById(propid).get();
-			
-			property.setAddress(newproperty.getAddress());
-			property.setPrice(newproperty.getPrice());
-			property.setType(newproperty.getType());
-			property.setPrice(newproperty.getPrice());
-			property.setNumbeds(newproperty.getNumbeds());
-		}catch(NoSuchElementException e) {
-			throw new NoSuchElementException("Property " +propid+ " does not exist!");
-		}finally {
-			return prepo.save(property);
-		}
+		PropertyEntity property = prepo.findById(propid).orElseThrow(() -> new NoSuchElementException("Property " + propid + " does not exist!"));
+
+		property.setAddress(newproperty.getAddress());
+		property.setPrice(newproperty.getPrice());
+		property.setType(newproperty.getType());
+		property.setSize(newproperty.getSize());
+		property.setNumbeds(newproperty.getNumbeds());
+		property.setFile(newproperty.getFile());
+
+		return prepo.save(property);
 	}
-	
-	//Delete
+
 	public String deleteProperty(int propid) {
-		String msg = "";
-		
-		if(prepo.findById(propid) != null) {
+		if(prepo.existsById(propid)) {
 			prepo.deleteById(propid);
-			msg = "Property " +propid+ " is successfully deleted";
-		}else {
-			msg = "Property " +propid+ " does not exists";
+			return "Property " + propid + " is successfully deleted";
+		} else {
+			return "Property " + propid + " does not exist";
 		}
-		return msg;
 	}
 }

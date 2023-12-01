@@ -22,32 +22,28 @@ public class StudentEntity {
 	@Column(name="lastname")
 	private String last_name;
 	
-	@Column(name="email")
-	private String email;
-	
 	@Column(name="gender")
 	private String gender;
 	
 	@Column(name="phonenumber")
 	private String phone_number;
 	
-	@Column(name="address")
-	private String address;
+	@Column(name="password")
+	private String password;
 
 	public StudentEntity() {
 		super();
 	}
 
-	public StudentEntity(int student_id, String first_name, String last_name, String email, String gender,
-			String phone_number, String address) {
+	public StudentEntity(int student_id, String first_name, String last_name, String gender,
+			String phone_number, String password) {
 		super();
 		this.student_id = student_id;
 		this.first_name = first_name;
 		this.last_name = last_name;
-		this.email = email;
 		this.gender = gender;
 		this.phone_number = phone_number;
-		this.address = address;
+		this.password = password;
 	}
 
 	public int getStudent_id() {
@@ -74,14 +70,6 @@ public class StudentEntity {
 		this.last_name = last_name;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getGender() {
 		return gender;
 	}
@@ -98,12 +86,12 @@ public class StudentEntity {
 		this.phone_number = phone_number;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
 

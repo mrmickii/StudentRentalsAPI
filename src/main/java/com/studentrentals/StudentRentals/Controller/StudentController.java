@@ -3,6 +3,7 @@ package com.studentrentals.StudentRentals.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +18,8 @@ import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Service.StudentService;
 
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/studentrentals")
+@CrossOrigin
 public class StudentController {
 	
 	@Autowired

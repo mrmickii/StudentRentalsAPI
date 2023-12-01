@@ -3,47 +3,65 @@ package com.studentrentals.StudentRentals.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.studentrentals.StudentRentals.Entity.PropertyEntity;
 import com.studentrentals.StudentRentals.Service.PropertyService;
 
 @RestController
-@RequestMapping("/property")
+@RequestMapping("/studentrentals")
+@CrossOrigin
 public class PropertyController {
 
 	@Autowired
 	PropertyService propserv;
 	
-	//Create
 	@PostMapping("/insertProperty")
-	public PropertyEntity insertProperty(@RequestBody PropertyEntity property) {
-		return propserv.insertProperty(property);
+	public ResponseEntity<PropertyEntity> insertProperty(@RequestParam("file") MultipartFile file,
+	                                                    @RequestParam("address") String address,
+	                                                    @RequestParam("price") int price,
+	                                                    @RequestParam("type") String type,
+	                                                    @RequestParam("size") int size,
+	                                                    @RequestParam("numbeds") int numbeds) {
+		try {
+			byte[] image = file.getBytes();
+			PropertyEntity property = new PropertyEntity(address, price, type, size, numbeds, file);
+			PropertyEntity insertedProperty = propserv.insertProperty(property);
+			return new ResponseEntity<>(insertedProperty, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
-	//Read
+
 	@GetMapping("/getAllProperty")
 	public List<PropertyEntity> getAllProperty(){
 		return propserv.getAllProperty();
 	}
-	
-	//Update
-	@PutMapping("/updateProperty")
-	public PropertyEntity updateProperty(@RequestParam int propid, @RequestBody PropertyEntity newproperty) {
-		return propserv.updateProperty(propid, newproperty);
+
+	@PutMapping("/updateProperty/{propid}")
+	public ResponseEntity<PropertyEntity> updateProperty(@PathVariable int propid,
+	                                                     @RequestParam("file") MultipartFile file,
+	                                                     @RequestParam("address") String address,
+	                                                     @RequestParam("price") int price,
+	                                                     @RequestParam("type") String type,
+	                                                     @RequestParam("size") int size,
+	                                                     @RequestParam("numbeds") int numbeds) {
+		try {
+			byte[] image = file.getBytes();
+			PropertyEntity newproperty = new PropertyEntity(address, price, type, size, numbeds, file);
+			PropertyEntity updatedProperty = propserv.updateProperty(propid, newproperty);
+			return new ResponseEntity<>(updatedProperty, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
-	//Delete
+
 	@DeleteMapping("/deleteProperty/{propid}")
-	public String deleteProperty(@PathVariable int propid) {
-		return propserv.deleteProperty(propid);
+	public ResponseEntity<String> deleteProperty(@PathVariable int propid) {
+		String msg = propserv.deleteProperty(propid);
+		return new ResponseEntity<>(msg, HttpStatus.OK);
 	}
 }

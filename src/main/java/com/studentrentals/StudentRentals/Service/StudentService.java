@@ -37,8 +37,8 @@ public class StudentService {
 			//2. update the record
 			student.setFirst_name(newStudentDetails.getFirst_name());
 			student.setLast_name(newStudentDetails.getLast_name());
-			student.setAddress(newStudentDetails.getAddress());
-			student.setEmail(newStudentDetails.getEmail());
+			student.setPassword(newStudentDetails.getPassword());
+			student.setGender(newStudentDetails.getGender());
 			student.setPhone_number(newStudentDetails.getPhone_number());
 		}catch(NoSuchElementException ex) {
 			throw new NoSuchElementException("Student "+student_id+" does not exist");

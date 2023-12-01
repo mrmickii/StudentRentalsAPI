@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
+import org.springframework.data.annotation.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name="tblproperty")
@@ -30,19 +33,23 @@ public class PropertyEntity {
 	
 	@Column(name="numberofbedrooms")
 	private int numbeds;
-	
+
+	@Lob
+	@Transient
+	private MultipartFile file;
+
 	public PropertyEntity() {
 		super();
 	}
 
-	public PropertyEntity(int propid, String address, int price, String type, int size, int numbeds) {
+	public PropertyEntity(String address, int price, String type, int size, int numbeds, MultipartFile file) {
 		super();
-		this.propid = propid;
 		this.address = address;
 		this.price = price;
 		this.type = type;
 		this.size = size;
 		this.numbeds = numbeds;
+		this.file = file;
 	}
 
 	public int getPropid() {
@@ -91,5 +98,14 @@ public class PropertyEntity {
 
 	public void setNumbeds(int numbeds) {
 		this.numbeds = numbeds;
-	}	
+	}
+
+	public MultipartFile getFile() {
+	    return file;
+	}
+
+	public void setFile(MultipartFile file) {
+	    this.file = file;
+	}
+
 }
