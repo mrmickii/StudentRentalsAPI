@@ -11,14 +11,23 @@ import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Repository.StudentRepository;
 
 @Service
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin
 public class StudentService {
 	@Autowired
 	StudentRepository srepo;
 	
+	//Login student
+	public boolean authenticate(String username, String password) {
+	    StudentEntity student = srepo.findByUsernameAndPassword(username, password);
+	    return student != null;
+	}
+	
 	//C- Create or insert student record in tblstudent
 	public StudentEntity insertStudent(StudentEntity student) {
-		return srepo.save(student);
+		 String username = student.getFirst_name().toLowerCase() + "." + student.getLast_name().toLowerCase();
+		 student.setUsername(username);
+		 
+		 return srepo.save(student);
 	}
 	
 	//R- Read all records in tblstudent

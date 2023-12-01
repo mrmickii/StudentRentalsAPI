@@ -24,7 +24,17 @@ public class StudentController {
 	
 	@Autowired
 	StudentService sserv;
-
+	
+	//For Login
+	@PostMapping("/login")
+	public String login(@RequestParam String username, @RequestParam String password) {
+	    boolean isAuthenticated = sserv.authenticate(username, password);
+	    if (isAuthenticated) {
+	        return "Login successful";
+	    } else {
+	        return "Username or password is incorrect"; 
+	    }
+	}
 	
 	//C- Create a student record 
 	@PostMapping("/insertStudent")
