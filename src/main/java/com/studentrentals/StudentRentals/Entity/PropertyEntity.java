@@ -35,21 +35,21 @@ public class PropertyEntity {
 	private int numbeds;
 
 	@Lob
-	@Transient
-	private MultipartFile file;
-
+    @Column(name = "image")
+    private byte[] image;
+	
 	public PropertyEntity() {
 		super();
 	}
 
-	public PropertyEntity(String address, int price, String type, int size, int numbeds, MultipartFile file) {
+	public PropertyEntity(String address, int price, String type, int size, int numbeds, byte[] image) {
 		super();
 		this.address = address;
 		this.price = price;
 		this.type = type;
 		this.size = size;
 		this.numbeds = numbeds;
-		this.file = file;
+		this.image = image;
 	}
 
 	public int getPropid() {
@@ -100,12 +100,11 @@ public class PropertyEntity {
 		this.numbeds = numbeds;
 	}
 
-	public MultipartFile getFile() {
-	    return file;
+	public byte[] getImage() {
+		return image;
 	}
 
-	public void setFile(MultipartFile file) {
-	    this.file = file;
-	}
-
+	public void setImage(byte[] image) {
+		this.image = image;
+	}	
 }
