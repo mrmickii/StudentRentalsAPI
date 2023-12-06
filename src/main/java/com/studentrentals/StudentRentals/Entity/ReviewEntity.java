@@ -82,9 +82,4 @@ public class ReviewEntity {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-    
-    
-	
-    
-
 }
