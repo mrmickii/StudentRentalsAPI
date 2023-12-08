@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.studentrentals.StudentRentals.Entity.PropertyEntity;
@@ -13,29 +14,31 @@ import com.studentrentals.StudentRentals.Repository.PropertyRepository;
 import com.studentrentals.StudentRentals.Util.ImageUtil;
 
 @Service
+@CrossOrigin
 public class PropertyService {
 	
 	@Autowired
 	PropertyRepository prepo;
 	
-	public PropertyEntity insertProperty(String address, int price, String type, int size, int numbeds, MultipartFile imageFile) throws IOException {
-        PropertyEntity property = new PropertyEntity(address, price, type, size, numbeds, null);
+	public PropertyEntity insertProperty(String name, String address, int price, String type, int size, int numbeds, MultipartFile imageFile) throws IOException {
+        PropertyEntity property = new PropertyEntity(name, address, price, type, size, numbeds, null);
         
         if (imageFile != null) {
             property.setImage(ImageUtil.compressImage(imageFile.getBytes()));
         }
 
         return prepo.save(property);
-    }
+    }	
 
 
 	public List<PropertyEntity> getAllProperty(){
 		return prepo.findAll();
 	}
 
-	public PropertyEntity updateProperty(int propid, String address, int price, String type, int size, int numbeds, PropertyEntity newproperty) {
+	public PropertyEntity updateProperty(int propid, String name, String address, int price, String type, int size, int numbeds, PropertyEntity newproperty) {
         PropertyEntity property = prepo.findById(propid).orElseThrow(() -> new NoSuchElementException("Property " + propid + " does not exist!"));
 
+        property.setName(name);
         property.setAddress(address);
         property.setPrice(price);
         property.setType(type);

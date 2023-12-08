@@ -22,13 +22,14 @@ public class PropertyController {
 	PropertyService propserv;
 	
 	@PostMapping("/insertProperty")
-    public PropertyEntity insertProperty(@RequestParam String address,
+    public PropertyEntity insertProperty(@RequestParam String name,
+    									 @RequestParam String address,
                                          @RequestParam int price,
                                          @RequestParam String type,
                                          @RequestParam int size,
                                          @RequestParam int numbeds,
                                          @RequestPart(value = "image", required = false) MultipartFile imageFile) throws IOException {
-        return propserv.insertProperty(address, price, type, size, numbeds, imageFile);
+        return propserv.insertProperty(name, address, price, type, size, numbeds, imageFile);
     }
 
 	@GetMapping("/getAllProperty")
@@ -38,13 +39,14 @@ public class PropertyController {
 
 	@PutMapping("/updateProperty/{propid}")
     public PropertyEntity updateProperty(@PathVariable int propid,
+    									 @RequestParam String name,
                                          @RequestParam String address,
                                          @RequestParam int price,
                                          @RequestParam String type,
                                          @RequestParam int size,
                                          @RequestParam int numbeds,
                                          @RequestBody PropertyEntity newPropertyDetails) {
-        return propserv.updateProperty(propid, address, price, type, size, numbeds, newPropertyDetails);
+        return propserv.updateProperty(propid, name, address, price, type, size, numbeds, newPropertyDetails);
     }
 
 	@DeleteMapping("/deleteProperty/{propid}")
