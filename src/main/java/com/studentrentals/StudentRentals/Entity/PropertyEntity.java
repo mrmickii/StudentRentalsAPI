@@ -18,6 +18,9 @@ public class PropertyEntity {
 	@Column(name="propertyid")
 	private int propid;
 	
+	@Column(name="name")
+	private String name;
+	
 	@Column(name="address")
 	private String address;
 	
@@ -41,8 +44,9 @@ public class PropertyEntity {
 		super();
 	}
 
-	public PropertyEntity(String address, int price, String type, int size, int numbeds, byte[] image) {
+	public PropertyEntity(String name, String address, int price, String type, int size, int numbeds, byte[] image) {
 		super();
+		this.name = name;
 		this.address = address;
 		this.price = price;
 		this.type = type;
@@ -57,6 +61,14 @@ public class PropertyEntity {
 
 	public void setPropid(int propid) {
 		this.propid = propid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getAddress() {
