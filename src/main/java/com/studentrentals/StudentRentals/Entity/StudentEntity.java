@@ -31,7 +31,7 @@ public class StudentEntity {
     private String password;
 
     @Column(name = "username")
-    private String username; // Added username field
+    private String username; 
 
     public StudentEntity() {
         super();

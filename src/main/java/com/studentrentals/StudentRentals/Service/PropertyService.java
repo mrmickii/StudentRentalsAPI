@@ -20,6 +20,15 @@ public class PropertyService {
 	@Autowired
 	PropertyRepository prepo;
 	
+	public byte[] getImageByPropertyId(int propid) {
+        PropertyEntity property = prepo.findById(propid).orElseThrow(() -> new NoSuchElementException("Property " + propid + " does not exist!"));
+
+        // Assuming your image is stored as a byte array in the 'image' field of PropertyEntity
+        byte[] imageBytes = property.getImage();
+
+        return imageBytes;
+    }
+	
 	public PropertyEntity insertProperty(String name, String address, int price, String type, int size, int numbeds, MultipartFile imageFile) throws IOException {
         PropertyEntity property = new PropertyEntity(name, address, price, type, size, numbeds, null);
         

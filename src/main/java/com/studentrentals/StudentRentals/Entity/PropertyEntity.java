@@ -38,14 +38,14 @@ public class PropertyEntity {
 	private int numbeds;
 
 	@Lob
-    @Column(name = "image")
-    private byte[] image;
+    @Column(name = "images")
+    private byte[] images;
 	
 	public PropertyEntity() {
 		super();
 	}
 
-	public PropertyEntity(String name, String address, int price, String type, int size, int numbeds, byte[] image) {
+	public PropertyEntity(String name, String address, int price, String type, int size, int numbeds, byte[] images) {
 		super();
 		this.name = name;
 		this.address = address;
@@ -53,7 +53,7 @@ public class PropertyEntity {
 		this.type = type;
 		this.size = size;
 		this.numbeds = numbeds;
-		this.image = image;
+		this.images = images;
 	}
 
 	public int getPropid() {
@@ -113,10 +113,10 @@ public class PropertyEntity {
 	}
 
 	public byte[] getImage() {
-		return image;
+		return images;
 	}
 
-	public void setImage(byte[] image) {
-		this.image = image;
+	public void setImage(byte[] images) {
+		this.images = images;
 	}	
 }

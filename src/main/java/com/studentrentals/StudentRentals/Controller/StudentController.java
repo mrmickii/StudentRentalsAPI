@@ -3,6 +3,8 @@ package com.studentrentals.StudentRentals.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +29,15 @@ public class StudentController {
 	
 	//For Login
 	@PostMapping("/login")
-	public String login(@RequestParam String username, @RequestParam String password) {
+	public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
 	    boolean isAuthenticated = sserv.authenticate(username, password);
 	    if (isAuthenticated) {
-	        return "Login successful";
+	        return ResponseEntity.ok("Login successful");
 	    } else {
-	        return "Username or password is incorrect"; 
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username or password is incorrect");
 	    }
 	}
+
 	
 	//C- Create a student record 
 	@PostMapping("/insertStudent")
