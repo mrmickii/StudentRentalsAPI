@@ -76,7 +76,7 @@ public class PaymentEntity {
 		    sb.append("paymentid= ").append(paymentid).append(", ");
 		    sb.append("paymentMethod= ").append(paymentmethod).append(", ");
 		    sb.append("amount= ").append(amount).append(", ");
-		    sb.append("status= ").append(status).append(" }");
+		    sb.append("status= ").append(status).append(" } \n");
 		    return sb.toString();
 		}
 		

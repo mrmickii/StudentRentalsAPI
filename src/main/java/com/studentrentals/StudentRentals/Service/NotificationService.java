@@ -31,7 +31,7 @@ public class NotificationService {
 	    for (PaymentEntity payment : payments) {
 	        payment.setStatus(payserv.paymentStatus(payment.getPaymentId()));
 	    }
-	    System.out.println();
+	    
 	    return payments;
 	}
 	
