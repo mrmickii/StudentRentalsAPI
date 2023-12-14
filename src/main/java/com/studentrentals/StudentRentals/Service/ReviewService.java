@@ -30,10 +30,7 @@ public class ReviewService {
 		
 		try {
 			review = revrep.findById(reviewid).get();
-			
-			review.setTitle(newreview.getTitle());
 			review.setDescription(newreview.getDescription());
-			review.setRating(newreview.getRating());
 			review.setTimestamp(newreview.getTimestamp());
 		}catch(NoSuchElementException e){
 			throw new NoSuchElementException("FeedBack " +reviewid+ " does not  exist!");
