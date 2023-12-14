@@ -21,7 +21,7 @@ import com.studentrentals.StudentRentals.Service.ReviewService;
 @RestController
 @RequestMapping("/feedback")
 @CrossOrigin(origins = "http://localhost:5173")
-public class ReviewContoller {
+public class ReviewController {
 	
 	@Autowired
 	ReviewService revserv;
