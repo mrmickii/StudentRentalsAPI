@@ -19,7 +19,7 @@ import com.studentrentals.StudentRentals.Service.BookingService;
 
 @RestController 
 @RequestMapping("/booking")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000","http://localhost:5173"})
 public class BookingController {
 	
 	@Autowired
