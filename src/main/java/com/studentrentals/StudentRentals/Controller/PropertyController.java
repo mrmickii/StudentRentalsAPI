@@ -18,7 +18,7 @@ import com.studentrentals.StudentRentals.Service.PropertyService;
 
 @RestController
 @RequestMapping("/studentrentals")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:5173")
 public class PropertyController {
 
 	@Autowired
@@ -45,6 +45,21 @@ public class PropertyController {
 	            return ResponseEntity.status(500).build(); // Handle exceptions appropriately
 	        }
 	    }
+	 
+	 @GetMapping("/getProperty/{propid}")
+	 public ResponseEntity<PropertyEntity> getPropertyById(@PathVariable int propid) {
+	     try {
+	         PropertyEntity property = propserv.getPropertyById(propid);
+
+	         if (property != null) {
+	             return ResponseEntity.ok(property);
+	         } else {
+	             return ResponseEntity.notFound().build();
+	         }
+	     } catch (Exception e) {
+	         return ResponseEntity.status(500).build(); // Handle exceptions appropriately
+	     }
+	 }
 	
 	@PostMapping("/insertProperty")
     public PropertyEntity insertProperty(@RequestParam String name,

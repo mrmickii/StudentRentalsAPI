@@ -38,7 +38,7 @@ public class PaymentService {
 			
 			payment.setPaymentMethod(newpayment.getPaymentMethod());
 			payment.setAmount(newpayment.getAmount());
-			payment.setStatus(newpayment.isStatus());
+			payment.setStatus(newpayment.getStatus());
 		}catch(NoSuchElementException e) {
 			throw new NoSuchElementException("Payment " +paymentid+ " does not  exist!");
 		}finally {
@@ -66,7 +66,7 @@ public class PaymentService {
 	        );
 
 	       
-	        return payment.isStatus();
+	        return payment.getStatus();
 	    } catch (NoSuchElementException e) {
 	        
 	        throw e;

@@ -5,16 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Service.StudentService;
@@ -23,45 +14,43 @@ import com.studentrentals.StudentRentals.Service.StudentService;
 @RequestMapping("/studentrentals")
 @CrossOrigin
 public class StudentController {
-	
-	@Autowired
-	StudentService sserv;
-	
-	//For Login
-	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-	    boolean isAuthenticated = sserv.authenticate(username, password);
-	    if (isAuthenticated) {
-	        return ResponseEntity.ok("Login successful");
-	    } else {
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Username or password is incorrect");
-	    }
-	}
 
-	
-	//C- Create a student record 
-	@PostMapping("/insertStudent")
-	public StudentEntity insertStudent(@RequestBody StudentEntity student) {
-		return sserv.insertStudent(student);
-	}
-	
-	//R- read all student records in tblstudent
-	@GetMapping("/getAllStudents")
-	public List<StudentEntity>getAllStudents(){
-		return sserv.getAllStudents();
-	}
-	
-	//U- update a student record
-	@PutMapping("/updateStudent")
-	public StudentEntity updateStudent(@RequestParam int student_id, @RequestBody StudentEntity newStudentDetails) {
-		return sserv.updateStudent(student_id, newStudentDetails);
-	}
-	
-	//D- delete a student record
-	@DeleteMapping("/deleteStudent/{student_id}")
-	public String deleteStudent(@PathVariable int student_id) {
-		return sserv.deleteStudent(student_id);
-	}
-	
+    @Autowired
+    private StudentService studentService;
+
+    @PostMapping("/login")
+    public ResponseEntity<StudentEntity> login(@RequestParam String username, @RequestParam String password) {
+        StudentEntity student = studentService.authenticate(username, password);
+        if (student != null) {
+            return ResponseEntity.ok(student);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
+
+    @PostMapping("/insertStudent")
+    public ResponseEntity<StudentEntity> insertStudent(@RequestBody StudentEntity student) {
+        StudentEntity insertedStudent = studentService.insertStudent(student);
+        return ResponseEntity.status(HttpStatus.CREATED).body(insertedStudent);
+    }
+
+    @GetMapping("/getAllStudents")
+    public ResponseEntity<List<StudentEntity>> getAllStudents() {
+        List<StudentEntity> students = studentService.getAllStudents();
+        return ResponseEntity.ok(students);
+    }
+
+    @PutMapping("/updateStudent/{studentId}")
+    public ResponseEntity<StudentEntity> updateStudent(
+            @PathVariable int studentId,
+            @RequestBody StudentEntity newStudentDetails) {
+        StudentEntity updatedStudent = studentService.updateStudent(studentId, newStudentDetails);
+        return ResponseEntity.ok(updatedStudent);
+    }
+
+    @DeleteMapping("/deleteStudent/{studentId}")
+    public ResponseEntity<String> deleteStudent(@PathVariable int studentId) {
+        String message = studentService.deleteStudent(studentId);
+        return ResponseEntity.ok(message);
+    }
 }
-

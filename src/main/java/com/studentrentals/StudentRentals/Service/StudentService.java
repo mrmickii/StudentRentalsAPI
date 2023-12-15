@@ -1,72 +1,53 @@
 package com.studentrentals.StudentRentals.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.List;
 
 import com.studentrentals.StudentRentals.Entity.StudentEntity;
 import com.studentrentals.StudentRentals.Repository.StudentRepository;
 
 @Service
-@CrossOrigin
 public class StudentService {
-	@Autowired
-	StudentRepository srepo;
-	
-	//Login student
-	public boolean authenticate(String username, String password) {
-	    StudentEntity student = srepo.findByUsernameAndPassword(username, password);
-	    return student != null;
-	}
-	
-	//C- Create or insert student record in tblstudent
-	public StudentEntity insertStudent(StudentEntity student) {
-		 String username = student.getFirst_name().toLowerCase() + "." + student.getLast_name().toLowerCase();
-		 student.setUsername(username);
-		 
-		 return srepo.save(student);
-	}
-	
-	//R- Read all records in tblstudent
-	public List<StudentEntity> getAllStudents(){
-		return srepo.findAll();
-	}
-	
-	//U- update a student
-	@SuppressWarnings("finally")
-	public StudentEntity updateStudent(int student_id, StudentEntity newStudentDetails) {
-		StudentEntity student = new StudentEntity();
-		try {
-			//1. search the id number of the student that will be updated
-			student = srepo.findById(student_id).get();
-			
-			//2. update the record
-			student.setFirst_name(newStudentDetails.getFirst_name());
-			student.setLast_name(newStudentDetails.getLast_name());
-			student.setPassword(newStudentDetails.getPassword());
-			student.setGender(newStudentDetails.getGender());
-			student.setPhone_number(newStudentDetails.getPhone_number());
-		}catch(NoSuchElementException ex) {
-			throw new NoSuchElementException("Student "+student_id+" does not exist");
-		}finally {
-			return srepo.save(student);
-		}
-	}
-	
-	//D- delete a student
-	public String deleteStudent(int student_id) {
-		String msg = "";
-		
-		if(srepo.findById(student_id) != null) {
-			srepo.deleteById(student_id);
-			msg = "Student " + student_id + " is successfully deleted";
-		}else
-			msg = "Student " + student_id + " does not exist.";
-		
-		return msg;
-	}
-}
 
+    @Autowired
+    private StudentRepository studentRepository;
+
+    public StudentEntity authenticate(String username, String password) {
+        return studentRepository.findByUsernameAndPassword(username, password);
+    }
+
+    public StudentEntity insertStudent(StudentEntity student) {
+        String username = student.getFirst_name().toLowerCase() + "." + student.getLast_name().toLowerCase();
+        student.setUsername(username);
+        return studentRepository.save(student);
+    }
+
+    public List<StudentEntity> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    public StudentEntity updateStudent(int studentId, StudentEntity newStudentDetails) {
+        StudentEntity existingStudent = studentRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Student not found"));
+
+        // Update the existing student with new details
+        existingStudent.setFirst_name(newStudentDetails.getFirst_name());
+        existingStudent.setLast_name(newStudentDetails.getLast_name());
+        existingStudent.setGender(newStudentDetails.getGender());
+        existingStudent.setPhone_number(newStudentDetails.getPhone_number());
+        existingStudent.setPassword(newStudentDetails.getPassword());
+
+        return studentRepository.save(existingStudent);
+    }
+
+    public String deleteStudent(int studentId) {
+        if (studentRepository.existsById(studentId)) {
+            studentRepository.deleteById(studentId);
+            return "Student deleted successfully";
+        } else {
+            return "Student not found";
+        }
+    }
+}

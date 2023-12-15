@@ -49,8 +49,8 @@ public class PaymentEntity {
 			return amount;
 		}
 
-		public boolean isStatus() {
-			return status;
+		 public boolean getStatus() {
+		        return status;
 		}
 
 		public void setPaymentId(int paymentId) {

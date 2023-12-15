@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name="tblproperty")
 public class PropertyEntity {
