@@ -16,9 +16,10 @@ public class BookingService {
 	@Autowired
 	BookingRepository bookrep;
 	
-	//Create
+	// Create
 	public BookingEntity insert(BookingEntity booking) {
-		return bookrep.save(booking);
+	    booking.setPropertyName(booking.getPropertyName()); // set propertyName
+	    return bookrep.save(booking);
 	}
 	
 	//GetAll
@@ -35,10 +36,7 @@ public class BookingService {
 			booking = bookrep.findById(bookingid).get();
 			
 			booking.setFirstName(newbooking.getFirstName());
-			booking.setMiddleName(newbooking.getMiddleName());
 			booking.setLastName(newbooking.getLastName());
-			booking.setDateBirth(newbooking.getDateBirth());
-			booking.setEmail(newbooking.getEmail());
 			booking.setNumber(newbooking.getNumber());
 			booking.setSchool(newbooking.getSchool());
 			
@@ -47,7 +45,6 @@ public class BookingService {
 		}finally {
 			return bookrep.save(booking);
 		}
-		
 	}
 	
 	//Delete

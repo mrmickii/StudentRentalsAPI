@@ -44,10 +44,9 @@ public class PropertyService {
 		return prepo.findAll();
 	}
 	
-	public PropertyEntity getPropertyById(int propid) {
-	    return prepo.findById(propid)
-	            .orElse(null);
-	}
+    public PropertyEntity getPropertyById(int propid) {
+        return prepo.findById(propid).orElse(null);
+    }
 
 	public PropertyEntity updateProperty(int propid, String name, String address, int price, String type, int size, int numbeds, PropertyEntity newproperty) {
         PropertyEntity property = prepo.findById(propid).orElseThrow(() -> new NoSuchElementException("Property " + propid + " does not exist!"));

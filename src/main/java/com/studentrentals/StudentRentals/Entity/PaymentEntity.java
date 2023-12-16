@@ -16,24 +16,24 @@ public class PaymentEntity {
 		@Column(name="paymentid")
 		private int paymentid;
 		
-		@Column(name="paymentmethod")
-		private String paymentmethod;
+		@Column(name="selectedpaymentoption")
+		private String selectedPaymentOption;
 		
-		@Column(name="amount")
-		private double amount;
+		@Column(name = "price")
+	    private int price;
 		
 		@Column(name="status")
-		private boolean status;
+		private boolean status = true;
 
 		public PaymentEntity() {
 			super();
 		}
 
-		public PaymentEntity(int paymentId, String paymentMethod, double amount, boolean status) {
+		public PaymentEntity(int paymentId, String selectedPaymentOption, int price, boolean status) {
 			super();
 			this.paymentid = paymentId;
-			this.paymentmethod = paymentMethod;
-			this.amount = amount;
+			this.selectedPaymentOption = selectedPaymentOption;
+			this.price = price;
 			this.status = status;
 		}
 
@@ -41,12 +41,12 @@ public class PaymentEntity {
 			return paymentid;
 		}
 
-		public String getPaymentMethod() {
-			return paymentmethod;
+		public String getSelectedPaymentOption() {
+			return selectedPaymentOption;
 		}
 
-		public double getAmount() {
-			return amount;
+		public int getPrice() {
+			return price;
 		}
 
 		 public boolean getStatus() {
@@ -57,27 +57,19 @@ public class PaymentEntity {
 			this.paymentid = paymentId;
 		}
 
-		public void setPaymentMethod(String paymentMethod) {
-			this.paymentmethod = paymentMethod;
+		public void setSelectedPaymentOption(String selectedPaymentOption) {
+			this.selectedPaymentOption = selectedPaymentOption;
 		}
 
-		public void setAmount(double amount) {
-			this.amount = amount;
+		public void setPrice(int price) {
+			this.price = price;
 		}
 
+		public void setStatusDone() {
+			this.status = true;
+		}		
+		
 		public void setStatus(boolean status) {
-			this.status = status;
-		}
-		
-		@Override
-		public String toString() {
-		    StringBuilder sb = new StringBuilder();
-		    sb.append("Payment Details{ ");
-		    sb.append("paymentid= ").append(paymentid).append(", ");
-		    sb.append("paymentMethod= ").append(paymentmethod).append(", ");
-		    sb.append("amount= ").append(amount).append(", ");
-		    sb.append("status= ").append(status).append(" } \n");
-		    return sb.toString();
-		}
-		
+	        this.status = status;
+	    }
 }

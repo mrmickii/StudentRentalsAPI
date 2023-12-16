@@ -18,7 +18,7 @@ import com.studentrentals.StudentRentals.Entity.BookingEntity;
 import com.studentrentals.StudentRentals.Service.BookingService;
 
 @RestController 
-@RequestMapping("/booking")
+@RequestMapping("/studentrentals")
 @CrossOrigin(origins = {"http://localhost:3000","http://localhost:5173"})
 public class BookingController {
 	

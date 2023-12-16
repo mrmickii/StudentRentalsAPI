@@ -6,6 +6,4 @@ import com.studentrentals.StudentRentals.Entity.PaymentEntity;
 
 public interface NotificationRepository extends JpaRepository<PaymentEntity, Integer> {
 	
-	
-
 }
