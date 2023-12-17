@@ -45,6 +45,4 @@ public class ReviewController {
   	public String delete(@PathVariable int reviewid) {
   		return revserv.delete(reviewid);
   	}
-	
-
 }
